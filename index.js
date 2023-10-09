@@ -40,6 +40,7 @@ app.post("/new", (req, res) => {
         console.log(err);
       } else {
         console.log("New data successfully written in newdata.json file");
+        console.log(newdata);
       }
     }
   );
