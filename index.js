@@ -51,6 +51,22 @@ app.post("/new", (req, res) => {
 app.put(`/update`, (req, res) => {
   data.splice(0, 1, req.body);
   res.send(data);
+  console.log(data);
+
+  fs.writeFile(
+    "./data/newdata.json",
+    JSON.stringify(data),
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Updated data successfully written in newdata.json file");
+      }
+    }
+  );
+
+
+
 });
 
 //Delete ---------
