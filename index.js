@@ -32,15 +32,15 @@ app.post("/new", (req, res) => {
   const newdata = req.body;
 
   fs.writeFile(
-    "./data/newdata.json",
-    JSON.stringify(newdata),
-    { flag: "a" },
+    "./data/data.json",
+    JSON.stringify(data),
+    
     (err) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("New data successfully written in newdata.json file");
-        console.log(newdata);
+        console.log("New data added successfully ");
+        console.log(data);
       }
     }
   );
@@ -49,18 +49,20 @@ app.post("/new", (req, res) => {
 //PUT------------
 
 app.put(`/update`, (req, res) => {
-  data.splice(0, 1, req.body);
+
+const x = data.length-1;
+  data.splice(x, 1, req.body);
   res.send(data);
   console.log(data);
 
   fs.writeFile(
-    "./data/newdata.json",
+    "./data/data.json",
     JSON.stringify(data),
     (err) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("Updated data successfully written in newdata.json file");
+        console.log("Updated data successfully ");
       }
     }
   );
@@ -74,6 +76,20 @@ app.put(`/update`, (req, res) => {
 app.delete(`/delete`, (req, res) => {
   data.pop();
   res.send(data);
+
+  fs.writeFile(
+    "./data/data.json",
+    JSON.stringify(data),
+    (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Deleted data successfully ");
+      }
+    }
+  );
+
+
 });
 
 app.listen(PORT, () => {
